@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body ng-app="app">
+    <p>
+        <a ui-sref="main.home">主页</a>
+    </p>
+    <div ui-view></div>
+
+    <script src="angular-1.4.6.min.js"></script>
+    <script src="angular-ui-router.js"></script>
+    <script>
+        //抽象模版：
+        angular.module('app', ['ui.router'])
+            .config(['$stateProvider', function($stateProvider) {
+                $stateProvider
+                    .state('main', {
+                        url: '/main',
+                        abstract: true,
+                        template: '<div ui-view="home" my-data="msg"></div><div ui-view="about"></div>',
+                        controller: function($scope) {
+                            $scope.msg = 'hello';
+                            console.log($scope);
+                        }
+                    })
+                    .state('main.home', {
+                        url: '/home',
+                        views: {
+                            home: {
+                                template: "<div>Home....{{myData}}</div>",
+                                scope: {
+                                    myData: "="
+                                },
+                                controller: function($scope) {
+                                    console.log($scope);
+                                }
+                            }
+                        }
+                    })
+                    .state('main.about', {
+                        url: "/about",
+                        views: {
+                            about: {
+                                template: '<div>About.....</div>'
+                            }
+                        }
+                    });
+            }])
+    </script>
+</body>
+
+</html>
