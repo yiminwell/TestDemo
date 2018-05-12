@@ -4,9 +4,6 @@ import Vue from 'vue'
 //导入bootstrap.css
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-// window.jQuery=window.$=require('jquery');
-// import bs from 'bootstrap'; //导入bootstrap.js
-
 //App.vue定义了App组件对象
 import App from './App';
 //导入容器对象
